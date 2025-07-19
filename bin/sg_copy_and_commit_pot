@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#
+# copy .pot/.po from beta branch for installed addons and git push changes.
+#
+
+set -eux
+
+# https://github.com/actions/checkout/issues/766
+git config --global --add safe.directory $PWD
+
+git config user.name ${OCA_GIT_USER_NAME}
+git config user.email ${OCA_GIT_USER_EMAIL}
+
+PUSH_REPOSITORY=$1
+
+if [ "$PUSH_REPOSITORY" != "origin" ]; then
+    git remote set-url origin $PUSH_REPOSITORY
+fi
+git remote -v
+git fetch --unshallow origin
+
+pip install git+https://github.com/steingabelgaard/click-odoo-sg.git@master
+click-odoo-copypot --addons-dir ${ADDONS_DIR} -d ${PGDATABASE} --commit --log-level=debug --commit-message="[UPD] Copy {addon_name}.pot/da.po[ci skip]" --pot-branch $2
+
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse @{u})
+BASE=$(git merge-base @ @{u})
+
+if [ $LOCAL = $REMOTE ]; then
+    echo "No local change to push."
+elif [ $REMOTE = $BASE ]; then
+    echo "Pushing changes..."
+    git push $PUSH_REPOSITORY
+else
+    echo "Remote has evolved since we cloned, not pushing."
+fi
