@@ -1,4 +1,4 @@
-ARG codename=focal
+*ARG codename=focal
 
 FROM ubuntu:$codename
 ENV LANG=C.UTF-8
@@ -98,7 +98,7 @@ RUN pipx install --pip-args="--no-cache-dir" "manifestoo>=0.3.1"
 # Used in oca_checklog_odoo to check odoo logs for errors and warnings
 RUN pipx install --pip-args="--no-cache-dir" checklog-odoo
 # Used in sg_copy_pot
-RUN pip install --pip-args="--no-cache-dir" git+https://github.com/steingabelgaard/click-odoo-sg.git@master
+# RUN pip install --pip-args="--no-cache-dir" git+https://github.com/steingabelgaard/click-odoo-sg.git@master
 
 # Install pyproject-dependencies helper scripts.
 ARG build_deps="setuptools-odoo wheel whool"
