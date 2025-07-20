@@ -1,4 +1,4 @@
-*ARG codename=focal
+ARG codename=focal
 
 FROM ubuntu:$codename
 ENV LANG=C.UTF-8
