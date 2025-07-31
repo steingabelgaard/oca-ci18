@@ -126,6 +126,10 @@ RUN sed -i -E "s/^(gevent|greenlet)==.*/\1/" /tmp/ocb-requirements.txt \
       -r /tmp/ocb-requirements.txt \
       packaging
 
+# Install Open Upgrade req. from our fork. We add often used packages to these
+ADD https://raw.githubusercontent.com/steingabelgaard/OpenUpgrade/$odoo_version/requirements.txt /tmp/sgou-requirements.txt
+RUN pip install --no-cache-dir -r /tmp/sgou-requirements.txt
+
 # Install other test requirements.
 # - coverage
 # - websocket-client is required for Odoo browser tests
