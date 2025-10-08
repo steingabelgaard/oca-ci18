@@ -19,6 +19,10 @@ RUN apt-get update -qq \
 
 ENV PIPX_BIN_DIR=/usr/local/bin
 
+# Increase timeout for keyserver
+RUN mkdir -p ~/.gnupg \
+    && echo connect-timeout 600 >> ~/.gnupg/dirmngr.conf
+
 # Install wkhtml
 RUN case $(lsb_release -c -s) in \
       focal) WKHTML_DEB_URL=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.focal_amd64.deb ;; \
@@ -45,12 +49,6 @@ RUN npm install -g rtlcss less@3.0.4 less-plugin-clean-css
 # Install postgresql client
 RUN apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install -qq postgresql-client
-
-# Install Google following Odoo's Runbot guideline https://github.com/odoo/runbot/blob/f8f435d468135486146a2e61e8d15d0f453c0e15/runbot/data/dockerfile_data.xml#L139-L140
-RUN curl -sSL https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.182-1_amd64.deb -o /tmp/chrome.deb \
-    && apt-get update -qq \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -qq -y --no-install-recommends /tmp/chrome.deb  \
-    && rm /tmp/chrome.deb
 
 RUN add-apt-repository -y ppa:deadsnakes/ppa
 
@@ -84,7 +82,18 @@ RUN apt-get update -qq \
        # some other build tools
        swig \
        libffi-dev \
-       pkg-config
+       pkg-config \
+       jq \
+       # chrome
+       unzip \
+       '?and(?name(libatk-bridge.*) | ?name(libatk1.*) | ?name(libdrm2.*) | ?name(libxcomposite1.*) | ?name(libXdamage.*) | ?name(libxfixes3.*) | ?name(libXrandr.*) | ?name(libgbm.*) | ?name(libxkbcommon0.*) | ?name(libpango1.*) | ?name(libcairo2.*) | ?name(libasound2), ?not(?name(.*-dev)))'
+
+# Install chrome
+ARG chrome_milestone=126
+RUN curl -sSL $(curl -s https://googlechromelabs.github.io/chrome-for-testing/latest-versions-per-milestone-with-downloads.json | jq -r '.milestones."'$chrome_milestone'".downloads.chrome | .[] | select(.platform == "linux64") .url') -o /tmp/chrome.zip \
+    && unzip /tmp/chrome.zip -d /opt \
+    && ln -snf /opt/chrome-linux64/chrome /usr/bin/google-chrome \
+    && rm /tmp/chrome.zip
 
 # We use manifestoo to check licenses, development status and list addons and dependencies
 RUN pipx install --pip-args="--no-cache-dir" "manifestoo>=0.3.1"
@@ -107,7 +116,12 @@ ARG odoo_version
 
 # Install Odoo requirements (use ADD for correct layer caching).
 # We use requirements from OCB for easier maintenance of older versions.
-ADD https://raw.githubusercontent.com/OCA/OCB/$odoo_version/requirements.txt /tmp/ocb-requirements.txt
+ADD https://api.github.com/repos/OCA/OCB/git/refs/heads/$odoo_version /tmp/branch.json
+
+# Use the commit SHA from JSON to download exact requirements.txt
+RUN SHA=$(jq -r .object.sha /tmp/branch.json) \
+ && curl -sSL "https://raw.githubusercontent.com/OCA/OCB/${SHA}/requirements.txt" \
+    -o /tmp/ocb-requirements.txt
 # The sed command is to use the latest version of gevent and greenlet. The
 # latest version works with all versions of Odoo that we support here, and the
 # oldest pinned in Odoo's requirements.txt don't have wheels, and don't build
@@ -137,7 +151,6 @@ RUN pip install --no-cache-dir -e /opt/odoo                         \
 # Make an empty odoo.cfg
 RUN echo "[options]" > /etc/odoo.cfg
 ENV ODOO_RC=/etc/odoo.cfg
-ENV OPENERP_SERVER=/etc/odoo.cfg
 
 COPY bin/* /usr/local/bin/
 

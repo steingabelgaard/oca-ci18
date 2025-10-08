@@ -39,12 +39,8 @@ def test_odoo_rc():
     assert odoo_rc.read_text() == "[options]\n"
 
 
-def test_openerp_server_rc():
-    assert os.environ["OPENERP_SERVER"] == os.environ["ODOO_RC"]
-
-
 def test_import_odoo():
-    subprocess.check_call(["python", "-c", "import odoo; odoo.addons.__path__"])
+    subprocess.check_call(["python", "-c", "import odoo.addons"])
     subprocess.check_call(["python", "-c", "import odoo.cli"])
 
 
