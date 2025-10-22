@@ -83,8 +83,8 @@ RUN apt-get update -qq \
        # for pycups
        libcups2-dev \
        # for pdftotext
-       build-essential
-       libpoppler-cpp-dev
+       build-essential \
+       libpoppler-cpp-dev \
        # for mysqlclient \
        default-libmysqlclient-dev \
        # some other build tools
