@@ -122,12 +122,12 @@ ENV PATH=/opt/odoo-venv/bin:$PATH
 ARG odoo_version
 
 # Install Odoo requirements (use ADD for correct layer caching).
-# We use requirements from OCB for easier maintenance of older versions.
-ADD https://api.github.com/repos/OCA/OCB/git/refs/heads/$odoo_version /tmp/branch.json
+# We use requirements from our Odoo fork for easier maintenance of older versions.
+ADD https://api.github.com/repos/steingabelgaard/odoo/git/refs/heads/$odoo_version /tmp/branch.json
 
 # Use the commit SHA from JSON to download exact requirements.txt
 RUN SHA=$(jq -r .object.sha /tmp/branch.json) \
- && curl -sSL "https://raw.githubusercontent.com/OCA/OCB/${SHA}/requirements.txt" \
+ && curl -sSL "https://raw.githubusercontent.com/steingabelgaard/odoo/${SHA}/requirements.txt" \
     -o /tmp/ocb-requirements.txt
 # The sed command is to use the latest version of gevent and greenlet. The
 # latest version works with all versions of Odoo that we support here, and the
