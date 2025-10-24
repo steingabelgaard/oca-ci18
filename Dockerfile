@@ -187,3 +187,17 @@ ENV EXCLUDE=
 ENV OCA_GIT_USER_NAME=sgrunbot
 ENV OCA_GIT_USER_EMAIL=sgrunbot@adm.steingabelgaard.dk
 ENV OCA_ENABLE_CHECKLOG_ODOO=
+
+# Install commonly used OCA addons
+ADD https://api.github.com/repos/steingabelgaard/odoo/git/refs/heads/$odoo_version /tmp/branch.json
+
+# Use the commit SHA from JSON to download exact requirements.txt
+RUN SHA=$(jq -r .object.sha /tmp/branch.json) \
+ && curl -sSL "https://raw.githubusercontent.com/steingabelgaard/odoo/${SHA}/oca-addons.txt" \
+    -o /tmp/oca-addons-requirements.txt
+# The sed command is to use the latest version of gevent and greenlet. The
+# latest version works with all versions of Odoo that we support here, and the
+# oldest pinned in Odoo's requirements.txt don't have wheels, and don't build
+# anymore with the latest cython.
+RUN pip install --no-cache-dir \
+      -r /tmp/oca-addons-requirements.txt \
