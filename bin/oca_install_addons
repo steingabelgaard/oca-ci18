@@ -1,6 +1,7 @@
 #!/bin/bash
 set -ex
 
+mkdir -p /opt/odoo/dependencies
 # show pip config
 pip config list
 
