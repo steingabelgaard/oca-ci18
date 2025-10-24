@@ -52,7 +52,7 @@ fi
 if ! [ -f sg_dependencies.txt ]; then
   echo "No sg_dependencies.txt found"
 else
-  clone_sg_dependencies $1
+  clone_sg_dependencies /opt/odoo/dependencies ${ADDONS_DIR} $1
 fi
 
 
