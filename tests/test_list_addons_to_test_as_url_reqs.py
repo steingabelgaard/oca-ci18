@@ -43,6 +43,7 @@ def test_oca_list_addons_to_test_as_url_reqs__skip_test_requirement():
     with make_addons_dir(
         ["addon_success", "addon_with_deb_dep", "uninstallable_addon"]
     ) as addons_dir:
+        addons_dir.joinpath("sg_dependencies.txt").write_text("# leave empty for test")
         # add URL reference to addon_success
         addons_dir.joinpath("test-requirements.txt").write_text(
             f"{make_addon_dist_name('addon_success')} @ git+https://github.com/oca/dummy@refs/pull/123/head"
