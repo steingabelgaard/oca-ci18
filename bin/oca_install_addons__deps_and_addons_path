@@ -27,8 +27,13 @@ env SETUPTOOLS_ODOO_POST_VERSION_STRATEGY_OVERRIDE=none \
       >> test-requirements.txt
 cat test-requirements.txt
 
-pip install -r sg_dependencies.txt
-pip freeze
+if ! [ -f sg_dependencies.txt ]; then
+  echo "No sg_dependencies.txt found"
+else
+  pip install -r sg_dependencies.txt
+  pip freeze
+fi
+
 # We ensure that the test-constraints.txt file does not exist
 if [ -e "test-constraints.txt" ]; then
     echo "Error: test-constraints.txt already exists."
