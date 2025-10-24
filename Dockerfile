@@ -111,7 +111,7 @@ RUN pipx install --pip-args="--no-cache-dir" checklog-odoo
 # RUN pip install --pip-args="--no-cache-dir" git+https://github.com/steingabelgaard/click-odoo-sg.git@master
 
 # Install pyproject-dependencies helper scripts.
-ARG build_deps="setuptools-odoo wheel whool hatch-odoo"
+ARG build_deps="setuptools-odoo wheel whool hatch-odoo hatchling"
 RUN pipx install --pip-args="--no-cache-dir" pyproject-dependencies
 RUN pipx inject --pip-args="--no-cache-dir" pyproject-dependencies $build_deps
 
