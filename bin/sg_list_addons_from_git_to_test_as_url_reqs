@@ -35,7 +35,7 @@ def _make_addon_req(path, editable):
 def _list_addons_to_test(addons_dir):
     return (
         subprocess.check_output(
-            ["bin/sg_list_addons_in_checkout", addons_dir], 
+            ["sg_list_addons_in_checkout", addons_dir], 
             universal_newlines=True)
         .strip()
         .split(",")
