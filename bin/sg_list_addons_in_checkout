@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#
+# Print addons to test, comma separated.
+# Do not list addons that are not installable.
+#
+
+set -ex
+
+ADDONS=$(manifestoo --select-addons-dir $1 list --separator=,)
+
+echo $ADDONS

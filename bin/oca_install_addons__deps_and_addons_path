@@ -27,12 +27,12 @@ env SETUPTOOLS_ODOO_POST_VERSION_STRATEGY_OVERRIDE=none \
       >> test-requirements.txt
 cat test-requirements.txt
 
-if ! [ -f sg_dependencies.txt ]; then
-  echo "No sg_dependencies.txt found"
-else
-  pip install -r sg_dependencies.txt
-  pip list
-fi
+# if ! [ -f sg_dependencies.txt ]; then
+#   echo "No sg_dependencies.txt found"
+# else
+#   pip install -r sg_dependencies.txt
+#   pip list
+# fi
 
 # We ensure that the test-constraints.txt file does not exist
 if [ -e "test-constraints.txt" ]; then
@@ -48,6 +48,14 @@ else
     # old python where pip does not support URL constraints
     touch test-constraints.txt
 fi
+
+if ! [ -f sg_dependencies.txt ]; then
+  echo "No sg_dependencies.txt found"
+else
+  clone_sg_dependencies $1
+fi
+
+
 cat test-constraints.txt
 
 # Install dependencies of addons to test.

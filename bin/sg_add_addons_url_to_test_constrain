@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sg_list_addons_from_git_to_test_as_url_reqs $1 >> test-constraints.txt
