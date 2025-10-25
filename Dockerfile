@@ -19,6 +19,8 @@ RUN apt-get update -qq \
 
 ENV PIPX_BIN_DIR=/usr/local/bin
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+
 # Make pip work in standard-based mode only This disables use of deprecated
 # setup.py bdist_wheel and.py develop commands in favor of the PEP 517 and PEP
 # 660 interfaces.
