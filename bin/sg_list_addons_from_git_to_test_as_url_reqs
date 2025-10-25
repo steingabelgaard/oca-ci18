@@ -67,7 +67,9 @@ args = parser.parse_args()
 
 addons_dir = Path(args.checkoutdir)
 # Use test-requirement in main repo to skip
-addons_to_skip = _addons_in_test_requirements(os.getenv("ADDONS_DIR", "."))  
+addons_to_skip = _addons_in_test_requirements(
+    Path(os.getenv("ADDONS_DIR", "."))
+)  
 for addon_name in _list_addons_to_test(addons_dir):
     if addon_name in addons_to_skip:
         continue
