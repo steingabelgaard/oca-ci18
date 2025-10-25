@@ -66,10 +66,11 @@ parser.add_argument(
 args = parser.parse_args()
 
 addons_dir = Path(args.checkoutdir)
-# addons_to_skip = _addons_in_test_requirements(addons_dir)
+# Use test-requirement in main repo to skip
+addons_to_skip = _addons_in_test_requirements(os.getenv("ADDONS_DIR", "."))  
 for addon_name in _list_addons_to_test(addons_dir):
-    #if addon_name in addons_to_skip:
-    #    continue
+    if addon_name in addons_to_skip:
+        continue
     pyproject_path = addons_dir / addon_name / "pyproject.toml"
     if pyproject_path.exists():
         print(_make_addon_req(pyproject_path.parent, args.editable))
