@@ -19,8 +19,6 @@ RUN apt-get update -qq \
 
 ENV PIPX_BIN_DIR=/usr/local/bin
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
-
 # Increase timeout for keyserver
 RUN mkdir -p ~/.gnupg \
     && echo connect-timeout 600 >> ~/.gnupg/dirmngr.conf

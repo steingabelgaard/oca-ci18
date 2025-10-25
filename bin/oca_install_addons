@@ -1,10 +1,12 @@
 #!/bin/bash
 set -ex
 
+# SG: Folder for repo cloning
 mkdir -p /opt/odoo/dependencies
 # show pip config
 pip config list
 
+# SG: Add branch parameter to install: Give us beta versions on beta test
 oca_install_addons__deps_and_addons_path $1
 
 # show what we have installed

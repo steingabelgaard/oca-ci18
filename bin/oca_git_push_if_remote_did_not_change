@@ -4,6 +4,7 @@ set -eux
 
 PUSH_REPOSITORY=$1
 
+# SG: Prepare for push
 if [ "$PUSH_REPOSITORY" != "origin" ]; then
     git remote set-url origin $PUSH_REPOSITORY
 fi

@@ -19,6 +19,7 @@ RUN apt-get update -qq \
 
 ENV PIPX_BIN_DIR=/usr/local/bin
 
+# SG: use uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 # Make pip work in standard-based mode only This disables use of deprecated
@@ -189,6 +190,7 @@ ENV EXCLUDE=
 ENV OCA_GIT_USER_NAME=sgrunbot
 ENV OCA_GIT_USER_EMAIL=sgrunbot@adm.steingabelgaard.dk
 ENV OCA_ENABLE_CHECKLOG_ODOO=
+ENV SG_USE_UV=true
 
 # Install commonly used OCA addons
 ADD https://api.github.com/repos/steingabelgaard/odoo/git/refs/heads/$odoo_version /tmp/branch.json
@@ -201,5 +203,7 @@ RUN SHA=$(jq -r .object.sha /tmp/branch.json) \
 # latest version works with all versions of Odoo that we support here, and the
 # oldest pinned in Odoo's requirements.txt don't have wheels, and don't build
 # anymore with the latest cython.
+
+# SG: Install our most used OCA addons
 RUN pip install --no-cache-dir \
       -r /tmp/oca-addons-requirements.txt \
