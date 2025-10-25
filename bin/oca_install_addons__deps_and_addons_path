@@ -59,4 +59,8 @@ fi
 cat test-constraints.txt
 
 # Install dependencies of addons to test.
-pip install -r test-requirements.txt -c test-constraints.txt
+# Disable git versioning strategies for better performance, as we
+# are not interested in git post versions here.
+env SETUPTOOLS_ODOO_POST_VERSION_STRATEGY_OVERRIDE=none \
+    WHOOL_POST_VERSION_STRATEGY_OVERRIDE=none \
+    uv pip install -r test-requirements.txt -c test-constraints.txt
