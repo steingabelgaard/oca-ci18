@@ -173,3 +173,5 @@ ENV EXCLUDE=
 ENV OCA_GIT_USER_NAME=sgrunbot
 ENV OCA_GIT_USER_EMAIL=sgrunbot@adm.steingabelgaard.dk
 ENV OCA_ENABLE_CHECKLOG_ODOO=
+ENV SG_USE_UV=false
+

@@ -11,6 +11,19 @@
 set -ex
 shopt -s nullglob  # in case there is no setup.py nor pyproject.toml
 
+# We ensure that the test-constraints.txt file does not exist - SG: Moved to top
+if [ -e "test-constraints.txt" ]; then
+    echo "Error: test-constraints.txt already exists."
+    exit 1
+fi
+
+# SG: Install our repos
+if ! [ -f sg_dependencies.txt ]; then
+  echo "No sg_dependencies.txt found"
+else
+  clone_sg_dependencies /opt/odoo/dependencies ${ADDONS_DIR} $1
+fi
+
 # Compute and install direct dependencies of installable addons in $ADDONS_DIR
 # (this includes addons, python external dependencies and odoo itself).
 # The environment variables are for better perfomance as we are interested in
@@ -34,11 +47,7 @@ cat test-requirements.txt
 #   pip list
 # fi
 
-# We ensure that the test-constraints.txt file does not exist
-if [ -e "test-constraints.txt" ]; then
-    echo "Error: test-constraints.txt already exists."
-    exit 1
-fi
+
 # To be sure to install addons from this repo if they are dependencies of dependencies,
 # we create a constraints file with local directory references to the addons to test.
 if python -c 'import sys; sys.exit(sys.version_info < (3,6))' ; then
@@ -49,12 +58,7 @@ else
     touch test-constraints.txt
 fi
 
-# SG: Install our repos
-if ! [ -f sg_dependencies.txt ]; then
-  echo "No sg_dependencies.txt found"
-else
-  clone_sg_dependencies /opt/odoo/dependencies ${ADDONS_DIR} $1
-fi
+
 
 
 cat test-constraints.txt
