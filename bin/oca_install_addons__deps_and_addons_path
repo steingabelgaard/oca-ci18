@@ -21,7 +21,12 @@ fi
 if ! [ -f sg_dependencies.txt ]; then
   echo "No sg_dependencies.txt found"
 else
+  touch test-constraints.txt
   clone_sg_dependencies /opt/odoo/dependencies ${ADDONS_DIR} $1
+  echo "test-req after sg clone"
+  cat test-requirements.txt
+  echo "constrains af sg clone"
+  cat test-constraints.txt
 fi
 
 # Compute and install direct dependencies of installable addons in $ADDONS_DIR
