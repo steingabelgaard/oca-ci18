@@ -12,6 +12,5 @@ testvenv=/tmp/testvenv
 $testvenv/bin/pip install -r $here/requirements.txt
 
 export PATH=$here/../bin:$PATH
-export SG_USE_UV=false
 
 $testvenv/bin/pytest --color=yes --ignore $here/data $here "$@"

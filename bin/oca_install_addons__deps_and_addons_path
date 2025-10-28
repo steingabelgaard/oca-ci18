@@ -69,7 +69,7 @@ fi
 cat test-constraints.txt
 
 # Install dependencies of addons to test.
-if [ ${SG_USE_UV:-false} ]; then
+if [ ${SG_USE_UV:-false} == true]; then
     # SG: Use uv
     # Disable git versioning strategies for better performance, as we
     # are not interested in git post versions here.
