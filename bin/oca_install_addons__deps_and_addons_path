@@ -71,13 +71,13 @@ cat test-constraints.txt
 echo "Use UV?" ${SG_USE_UV}
 
 # Install dependencies of addons to test.
-if [ ${SG_USE_UV:-false} == true]; then
+#if [ ${SG_USE_UV:-false} == true]; then
     # SG: Use uv
     # Disable git versioning strategies for better performance, as we
     # are not interested in git post versions here.
     env SETUPTOOLS_ODOO_POST_VERSION_STRATEGY_OVERRIDE=none \
         WHOOL_POST_VERSION_STRATEGY_OVERRIDE=none \
         uv pip install -r test-requirements.txt -c test-constraints.txt
-else
-    pip install -r test-requirements.txt -c test-constraints.txt
-fi
+#else
+#    pip install -r test-requirements.txt -c test-constraints.txt
+#fi
