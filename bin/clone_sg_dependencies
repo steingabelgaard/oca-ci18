@@ -66,7 +66,7 @@ def git_checkout(deps_checkout_dir, reponame, url, branch):
         command = ['git', '--git-dir=' + os.path.join(checkout_dir, '.git'),
                    '--work-tree=' + checkout_dir, 'pull', '--ff-only',
                    url.format(**os.environ), branch]
-    _logger.info('Calling %s', ' '.join(command))
+    print('Calling ', ' '.join(command))
     subprocess.check_call(command)
     subprocess.check_call(["sg_add_addons_url_to_test_constrain", checkout_dir])
     return checkout_dir
@@ -78,6 +78,7 @@ def run(deps_checkout_dir, build_dir, branch):
     depfilename = osp.join(build_dir, 'sg_dependencies.txt')
     dependencies.append(depfilename)
     reqfilenames = []
+    extra_addonsdir = []
     if osp.isfile(osp.join(build_dir, 'requirements.txt')):
         reqfilenames.append(osp.join(build_dir, 'requirements.txt'))
     for repo in os.listdir(deps_checkout_dir):
@@ -103,6 +104,7 @@ def run(deps_checkout_dir, build_dir, branch):
                                         url, branch)
             new_dep_filename = osp.join(checkout_dir, 'sg_dependencies.txt')
             reqfilename = osp.join(checkout_dir, 'requirements.txt')
+            extra_addonsdir.append(checkout_dir)
             if osp.isfile(reqfilename):
                 reqfilenames.append(reqfilename)
             if new_dep_filename not in dependencies:
@@ -112,6 +114,7 @@ def run(deps_checkout_dir, build_dir, branch):
                    '-Ur', reqfilename]
         _logger.info('Calling %s', ' '.join(command))
         subprocess.check_call(command)
+    return extra_addonsdir
 
 
 if __name__ == '__main__':
@@ -130,4 +133,4 @@ if __name__ == '__main__':
             branch = sys.argv[3]
         else:
             branch = False
-    run(deps_checkout_dir, build_dir, branch)
+    print(','.join(run(deps_checkout_dir, build_dir, branch)))
