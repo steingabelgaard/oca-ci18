@@ -68,6 +68,8 @@ fi
 
 cat test-constraints.txt
 
+echo "Use UV?" ${SG_USE_UV}
+
 # Install dependencies of addons to test.
 if [ ${SG_USE_UV:-false} == true]; then
     # SG: Use uv
