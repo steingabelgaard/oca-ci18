@@ -55,6 +55,20 @@ ENV OCA_GIT_USER_EMAIL=sgrunbot@adm.steingabelgaard.dk
 ENV OCA_ENABLE_CHECKLOG_ODOO=
 ENV SG_USE_UV=true
 
+# Install build dependencies for python libs commonly used by Odoo and OCA
+RUN apt-get update -qq \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qq --no-install-recommends \
+       
+       # need libjpeg to build older pillow versions
+       libjpeg-dev \
+       # for pycups
+       libcups2-dev \
+       # for pdftotext
+       libpoppler-cpp-dev \
+       # for mysqlclient \
+       default-libmysqlclient-dev \
+    && apt-get clean
+
 # Install commonly used OCA addons
 # ADD https://api.github.com/repos/steingabelgaard/odoo/git/refs/heads/$odoo_version /tmp/branch.json
 
