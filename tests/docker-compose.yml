@@ -1,19 +1,21 @@
 services:
   test:
-    image: ghcr.io/oca/oca-ci/py3.10-ocb16.0:latest
-    # build:
-    #   context: ..
-    #   args:
-    #     codename: jammy
-    #     python_version: "3.10"
-    #     odoo_version: "16.0"
+    # image: ghcr.io/oca/oca-ci/py3.10-ocb16.0:latest
+    build:
+      context: ..
+      args:
+        chrome_milestone: 126
+        codename: jammy
+        odoo_org_repo: "odoo/odoo"
+        python_version: "3.10"
+        odoo_version: "18.0"
     volumes:
       - ..:/mnt/oca-ci
     working_dir: /mnt/oca-ci/tests
     depends_on:
       - postgres
   postgres:
-    image: postgres
+    image: postgres:12
     environment:
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: odoo
