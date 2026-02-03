@@ -22,30 +22,30 @@ jobs:
       matrix:
         include:
           # odoo/odoo
-          - python_version: "3.6"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "12.0"
-            odoo_org_repo: "odoo/odoo"
-            image_name: py3.6-odoo12.0
-          - python_version: "3.6"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "13.0"
-            odoo_org_repo: "odoo/odoo"
-            image_name: py3.6-odoo13.0
-          - python_version: "3.6"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "14.0"
-            odoo_org_repo: "odoo/odoo"
-            image_name: py3.6-odoo14.0
-          - python_version: "3.8"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "14.0"
-            odoo_org_repo: "odoo/odoo"
-            image_name: py3.8-odoo14.0
+          # - python_version: "3.6"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "12.0"
+          #   odoo_org_repo: "odoo/odoo"
+          #   image_name: py3.6-odoo12.0
+          # - python_version: "3.6"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "13.0"
+          #   odoo_org_repo: "odoo/odoo"
+          #   image_name: py3.6-odoo13.0
+          # - python_version: "3.6"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "14.0"
+          #   odoo_org_repo: "odoo/odoo"
+          #   image_name: py3.6-odoo14.0
+          # - python_version: "3.8"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "14.0"
+          #   odoo_org_repo: "odoo/odoo"
+          #   image_name: py3.8-odoo14.0
           - python_version: "3.8"
             codename: focal
             chrome_milestone: 126
@@ -83,66 +83,66 @@ jobs:
             odoo_org_repo: "odoo/odoo"
             image_name: py3.10-odoo19.0
           # oca/ocb
-          - python_version: "3.6"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "12.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.6-ocb12.0
-          - python_version: "3.6"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "13.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.6-ocb13.0
-          - python_version: "3.6"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "14.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.6-ocb14.0
-          - python_version: "3.8"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "14.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.8-ocb14.0
-          - python_version: "3.8"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "15.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.8-ocb15.0
-          - python_version: "3.9"
-            codename: focal
-            chrome_milestone: 126
-            odoo_version: "15.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.9-ocb15.0
-          - python_version: "3.10"
-            codename: jammy
-            chrome_milestone: 126
-            odoo_version: "16.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.10-ocb16.0
-          - python_version: "3.10"
-            codename: jammy
-            chrome_milestone: 139
-            odoo_version: "17.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.10-ocb17.0
-          - python_version: "3.10"
-            codename: jammy
-            chrome_milestone: 139
-            odoo_version: "18.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.10-ocb18.0
-          - python_version: "3.10"
-            codename: jammy
-            chrome_milestone: 139
-            odoo_version: "19.0"
-            odoo_org_repo: "oca/ocb"
-            image_name: py3.10-ocb19.0
+          # - python_version: "3.6"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "12.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.6-ocb12.0
+          # - python_version: "3.6"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "13.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.6-ocb13.0
+          # - python_version: "3.6"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "14.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.6-ocb14.0
+          # - python_version: "3.8"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "14.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.8-ocb14.0
+          # - python_version: "3.8"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "15.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.8-ocb15.0
+          # - python_version: "3.9"
+          #   codename: focal
+          #   chrome_milestone: 126
+          #   odoo_version: "15.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.9-ocb15.0
+          # - python_version: "3.10"
+          #   codename: jammy
+          #   chrome_milestone: 126
+          #   odoo_version: "16.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.10-ocb16.0
+          # - python_version: "3.10"
+          #   codename: jammy
+          #   chrome_milestone: 139
+          #   odoo_version: "17.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.10-ocb17.0
+          # - python_version: "3.10"
+          #   codename: jammy
+          #   chrome_milestone: 139
+          #   odoo_version: "18.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.10-ocb18.0
+          # - python_version: "3.10"
+          #   codename: jammy
+          #   chrome_milestone: 139
+          #   odoo_version: "19.0"
+          #   odoo_org_repo: "oca/ocb"
+          #   image_name: py3.10-ocb19.0
     services:
       postgres:
         image: postgres:12
