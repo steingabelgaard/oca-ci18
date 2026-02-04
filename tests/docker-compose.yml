@@ -7,8 +7,11 @@ services:
         chrome_milestone: 126
         codename: jammy
         odoo_org_repo: "odoo/odoo"
-        python_version: "3.10"
-        odoo_version: "18.0"
+        # Select the desired test configuration by uncommenting the appropriate lines
+        python_version: "3.8"
+        odoo_version: "15.0"
+        # python_version: "3.10"
+        # odoo_version: "18.0"
     volumes:
       - ..:/mnt/oca-ci
     working_dir: /mnt/oca-ci/tests
