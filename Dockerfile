@@ -54,6 +54,9 @@ RUN apt-get update -qq \
        libcups2-dev \
        # for pdftotext
        libpoppler-cpp-dev \
+       build-essential \
+       pkg-config \
+       python3-dev \
        # for mysqlclient \
        default-libmysqlclient-dev \
     && apt-get clean
