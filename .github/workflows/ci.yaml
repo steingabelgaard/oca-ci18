@@ -76,12 +76,12 @@ jobs:
             odoo_version: "18.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.10-odoo18.0
-          - python_version: "3.10"
+          - python_version: "3.12"
             codename: jammy
             chrome_milestone: 139
             odoo_version: "19.0"
             odoo_org_repo: "odoo/odoo"
-            image_name: py3.10-odoo19.0
+            image_name: py3.12-odoo19.0
           # oca/ocb
           # - python_version: "3.6"
           #   codename: focal
@@ -137,12 +137,12 @@ jobs:
           #   odoo_version: "18.0"
           #   odoo_org_repo: "oca/ocb"
           #   image_name: py3.10-ocb18.0
-          # - python_version: "3.10"
+          # - python_version: "3.12"
           #   codename: jammy
           #   chrome_milestone: 139
           #   odoo_version: "19.0"
           #   odoo_org_repo: "oca/ocb"
-          #   image_name: py3.10-ocb19.0
+          #   image_name: py3.12-ocb19.0
     services:
       postgres:
         image: postgres:12
