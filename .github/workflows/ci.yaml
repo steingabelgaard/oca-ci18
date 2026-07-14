@@ -172,10 +172,10 @@ jobs:
             odoo_version=${{ matrix.odoo_version }}
             odoo_org_repo=${{ matrix.odoo_org_repo }}
           tags: |
-            ghcr.io/oca/oca-ci/${{ matrix.image_name }}:latest
+            ghcr.io/steingabelgaard/oca-ci18/${{ matrix.image_name }}:latest
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
-          cache-from: type=registry,ref=ghcr.io/oca/oca-ci/${{ matrix.image_name }}:latest
+          cache-from: type=registry,ref=ghcr.io/steingabelgaard/oca-ci18/${{ matrix.image_name }}:latest
           cache-to: type=local,dest=/tmp/.buildx-cache
           load: true
       - name: Checkout
@@ -185,7 +185,7 @@ jobs:
         # Don't bother with Odoo 8 and 9 for now...
         if: ${{ matrix.odoo_version != '8.0' && matrix.odoo_version != '9.0' }}
       - name: Chrome version
-        run: docker run ghcr.io/oca/oca-ci/${{ matrix.image_name }}:latest /opt/chrome-linux64/chrome --version
+        run: docker run ghcr.io/steingabelgaard/oca-ci18/${{ matrix.image_name }}:latest /opt/chrome-linux64/chrome --version
       - name: Push image
         uses: docker/build-push-action@v6
         with:
