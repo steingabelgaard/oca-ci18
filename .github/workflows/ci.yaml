@@ -82,8 +82,8 @@ jobs:
             odoo_version: "19.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.12-odoo19.0
-            ciorg=steingabelgaard
-            cirepo=oca-ci-3.12
+            ciorg: steingabelgaard
+            cirepo: oca-ci-3.12
           # oca/ocb
           # - python_version: "3.6"
           #   codename: focal
