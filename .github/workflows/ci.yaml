@@ -183,6 +183,8 @@ jobs:
             python_version=${{ matrix.python_version }}
             odoo_version=${{ matrix.odoo_version }}
             odoo_org_repo=${{ matrix.odoo_org_repo }}
+            ciorg=${{ matrix.ciorg }}
+            cirepo=${{ matrix.cirepo }}
           tags: |
             ghcr.io/steingabelgaard/oca-ci18/${{ matrix.image_name }}:latest
           labels: |
