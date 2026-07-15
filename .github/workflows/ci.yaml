@@ -52,30 +52,40 @@ jobs:
             odoo_version: "15.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.8-odoo15.0
+            ciorg: oca
+            cirepo: oca-ci
           - python_version: "3.9"
             codename: focal
             chrome_milestone: 126
             odoo_version: "15.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.9-odoo15.0
+            ciorg: oca
+            cirepo: oca-ci
           - python_version: "3.10"
             codename: jammy
             chrome_milestone: 126
             odoo_version: "16.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.10-odoo16.0
+            ciorg: oca
+            cirepo: oca-ci
           - python_version: "3.10"
             codename: jammy
             chrome_milestone: 139
             odoo_version: "17.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.10-odoo17.0
+            ciorg: oca
+            cirepo: oca-ci
           - python_version: "3.10"
             codename: jammy
             chrome_milestone: 139
             odoo_version: "18.0"
             odoo_org_repo: "odoo/odoo"
             image_name: py3.10-odoo18.0
+            ciorg: oca
+            cirepo: oca-ci
           - python_version: "3.12"
             codename: jammy
             chrome_milestone: 139
@@ -197,6 +207,8 @@ jobs:
             python_version=${{ matrix.python_version }}
             odoo_version=${{ matrix.odoo_version }}
             odoo_org_repo=${{ matrix.odoo_org_repo }}
+            ciorg=${{ matrix.ciorg }}
+            cirepo=${{ matrix.cirepo }}
           tags: |
             ghcr.io/steingabelgaard/oca-ci18/${{ matrix.image_name }}:latest
           labels: |
