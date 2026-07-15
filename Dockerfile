@@ -1,7 +1,9 @@
+ARG ciorg=oca
+ARG cirepo=oca-ci
 ARG codename=focal
 ARG python_version=3.8
 ARG odoo_version
-FROM ghcr.io/oca/oca-ci/py${python_version}-odoo${odoo_version}:latest
+FROM ghcr.io/${ciorg}/${cirepo}/py${python_version}-odoo${odoo_version}:latest
 ENV LANG=C.UTF-8
 ENV ODOO_VERSION=$odoo_version
 USER root
